@@ -2,7 +2,6 @@ package br.com.bunbismuth.picpaydesafiobackend.transaction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
 import java.time.temporal.ChronoUnit;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -15,6 +14,7 @@ public record Transaction(
     Long payee,
     BigDecimal value,
     @CreatedDate LocalDateTime createdAt) {
+
   public Transaction {
     value = value.setScale(2);
     createdAt = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);

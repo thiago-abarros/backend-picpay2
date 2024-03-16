@@ -1,7 +1,6 @@
 package br.com.bunbismuth.picpaydesafiobackend.wallet;
 
 import java.math.BigDecimal;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 

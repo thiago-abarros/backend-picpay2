@@ -12,7 +12,7 @@ public class AuthorizerService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizerService.class);
 
-  private RestClient restClient;
+  private final RestClient restClient;
 
   public AuthorizerService(RestClient.Builder builder) {
     this.restClient = builder.baseUrl(
