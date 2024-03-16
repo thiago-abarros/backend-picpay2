@@ -1,6 +1,7 @@
 package br.com.bunbismuth.picpaydesafiobackend.transaction;
 
 import br.com.bunbismuth.picpaydesafiobackend.wallet.WalletRepository;
+import br.com.bunbismuth.picpaydesafiobackend.wallet.WalletType;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ public class TransactionService {
 
   @Transactional
   public Transaction create(Transaction transaction) {
+    validate(transaction);
 
     var newTransaction = transactionRepository.save(transaction);
 
@@ -34,5 +36,25 @@ public class TransactionService {
 
   public List<Transaction> list() {
     return transactionRepository.findAll();
+  }
+
+  /*
+   * A transaction is valid if:
+   * - the payer is a common wallet
+   * - the payer has enough balance
+   * - the payer is not the payee
+   */
+  private void validate(Transaction transaction) {
+    LOGGER.info("validating transaction {}...", transaction);
+
+    walletRepository.findById(transaction.payee())
+        .map(payee -> walletRepository.findById(transaction.payer())
+          .map(
+              payer -> payer.type() == WalletType.COMUM.getValue() &&
+                  payer.balance().compareTo(transaction.value()) >= 0 &&
+                  !payer.id().equals(transaction.payee()) ? true : null)
+          .orElseThrow(() -> new InvalidTransactionException(
+            "Invalid transaction - " + transaction
+        ))).orElseThrow(() -> new InvalidTransactionException("Invalid transaction - " + transaction));
   }
 }
