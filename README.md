@@ -15,7 +15,7 @@ A web email service project made in Spring for the PicPay Challenge, for studyin
 - [Docker Compose](https://docs.docker.com/compose/)
 - [H2](https://www.h2database.com/html/main.html)
 
-# How to execute
+# How to run
 
 - Clone the git repository
 ```
