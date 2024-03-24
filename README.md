@@ -4,8 +4,6 @@
 
 > **Important note:** this project was made originally by [@Giuliana Bezerra](https://github.com/giuliana-bezerra), on her video [Picpay simplificado com Java e Spring Boot!](https://youtu.be/YcuscoiIN14), this repository is only for study reasons, thank you in advance!
 
-# backend-picpay2
-
 A web email service project made in Spring for the PicPay Challenge, for studying architectural patterns and notification services.
 
 # Technologies
